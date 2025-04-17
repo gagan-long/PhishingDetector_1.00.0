@@ -5,11 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phishing Website Detector - Result</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='result.css') }}"> -->
+
 </head>
 <body>
     <h1>Phishing Website Analysis</h1>
     <p>URL: {{ url }}</p>
     <p>Prediction: {{ prediction }}</p>
+    <p>Risk Score: {{ risk_score }}</p>
 
     <h2>Details:</h2>
     <ul>
@@ -17,6 +20,17 @@
             <li><strong>{{ key }}:</strong> {{ value }}</li>
         {% endfor %}
     </ul>
+
+    <h2>Feedback:</h2>
+    <form method="post" action="/feedback">
+        <input type="hidden" name="url" value="{{ url }}">
+        <label for="feedback">Was this prediction accurate?</label>
+        <select name="feedback" id="feedback">
+            <option value="accurate">Yes</option>
+            <option value="inaccurate">No</option>
+        </select>
+        <button type="submit">Submit Feedback</button>
+    </form>
     <a href="/">Check Another URL</a>
 </body>
 </html>

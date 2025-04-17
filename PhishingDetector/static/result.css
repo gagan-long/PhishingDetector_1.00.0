@@ -1,0 +1,212 @@
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    width: 85%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 30px;
+    background-color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    flex: 1;
+}
+
+/* Header Styles */
+h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #ecf0f1;
+}
+
+/* URL and Prediction Display */
+.url-display {
+    background-color: #f0f3f5;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.url-display p {
+    font-size: 1.1em;
+    margin-bottom: 8px;
+    word-break: break-all; /* Prevent long URLs from breaking the layout */
+}
+
+.url-display .label {
+    font-weight: bold;
+    color: #777;
+    margin-right: 8px;
+}
+
+/* Risk Score and Prediction */
+.risk-assessment {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.risk-assessment p {
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.risk-score {
+    color: #e74c3c; /* Default to high risk */
+    font-size: 1.4em;
+}
+
+.risk-level {
+    font-weight: bold;
+}
+
+/* Detail List Styles */
+.details-section {
+    background-color: #f0f3f5;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.details-section h2 {
+    color: #34495e;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #d0d7de;
+}
+
+.details-list {
+    list-style: none;
+    padding: 0;
+}
+
+.details-list li {
+    padding: 12px 15px;
+    border-bottom: 1px solid #d0d7de;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.details-list li:last-child {
+    border-bottom: none;
+}
+
+.details-list .detail-label {
+    font-weight: bold;
+    color: #546e7a;
+}
+
+.details-list .detail-value {
+    color: #333;
+    text-align: right;
+}
+
+/* Feedback Form Styles */
+.feedback-section {
+    background-color: #ecf0f1;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.feedback-section h2 {
+    color: #34495e;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #d0d7de;
+}
+
+.feedback-form label {
+    display: block;
+    margin-bottom: 8px;
+    color: #777;
+    font-weight: 500;
+}
+
+.feedback-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+    appearance: none; /* Remove default arrow */
+    -webkit-appearance: none; /* Remove default arrow */
+    -moz-appearance: none;
+}
+
+/* Style the select arrow */
+.feedback-form select::-ms-expand {
+    display: none; /* For IE 11 */
+}
+
+/* Button Styles */
+.feedback-form button {
+    background-color: #2980b9;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.feedback-form button:hover {
+    background-color: #1a5276;
+}
+
+/* Link Styles */
+a {
+    color: #3498db;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #2980b9;
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #34495e;
+    color: white;
+    margin-top: auto;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .details-list li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .details-list .detail-value {
+        text-align: left;
+        margin-top: 5px;
+    }
+}
