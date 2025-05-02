@@ -7,6 +7,9 @@ import requests
 import socket
 from bs4 import BeautifulSoup
 import json
+from urllib.parse import urljoin
+from concurrent.futures import ThreadPoolExecutor
+
 
 app = Flask(__name__)
 
@@ -48,6 +51,9 @@ def extract_details(url):
 
         # Length of URL
         details['url_length'] = len(url)
+
+         # Add crawling results
+        details['found_paths'] = crawl_website(url)
 
         # Use of HTTPS
         details['uses_https'] = 'Yes' if parsed_url.scheme == 'https' else 'No'
@@ -151,6 +157,44 @@ def feedback():
     # For now, let's just print the feedback (later we can save it to a file or database)
     print(f"Feedback for {url}: {feedback}")
     return "Thank you for your feedback!"
+
+def crawl_website(target_url):
+    base_url = f"{urlparse(target_url).scheme}://{urlparse(target_url).netloc}"
+    session = requests.Session()
+    found_paths = set(['/'])
+    
+    def check_path(path):
+        try:
+            full_url = urljoin(base_url, path)
+            response = session.head(full_url, timeout=3, allow_redirects=True)
+            if response.status_code < 400:
+                return path
+        except:
+            return None
+    
+    # Common directory list
+    common_dirs = [
+        'admin', 'login', 'wp-admin', 'wp-content', 
+        'images', 'css', 'js', 'assets', 'uploads',
+        'backup', 'api', 'secret', 'private', ''
+    ]
+    
+    # Common file list
+    common_files = [
+        'robots.txt', 'sitemap.xml', 'config.php',
+        '.env', 'package.json', 'web.config', '.venv', 'index.php'
+    ]
+    
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        # Check directories
+        dir_paths = [f"/{d}/" for d in common_dirs]
+        found_paths.update(filter(None, executor.map(check_path, dir_paths)))
+        
+        # Check files
+        file_paths = [f"/{f}" for f in common_files]
+        found_paths.update(filter(None, executor.map(check_path, file_paths)))
+    
+    return sorted(found_paths)
 
 if __name__ == '__main__':
     app.run(debug=True)

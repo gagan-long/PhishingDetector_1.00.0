@@ -6,8 +6,6 @@
     <link rel="shortcut icon" href="icon.png" type="image/x-icon">
     <title>Phishing Website Detector - Result</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='result.css') }}"> -->
-
 </head>
 <body>
     <h1>Phishing Website Analysis</h1>
@@ -18,9 +16,29 @@
     <h2>Details:</h2>
     <ul>
         {% for key, value in details.items() %}
-            <li><strong>{{ key }}:</strong> {{ value }}</li>
+            {% if key != 'found_paths' %}
+                <li><strong>{{ key }}:</strong> {{ value }}</li>
+            {% endif %}
         {% endfor %}
     </ul>
+
+    <!-- New Crawling Results Section -->
+    <h2>Discovered Paths:</h2>
+    <div class="path-results">
+        {% if details.found_paths %}
+            <ul>
+                {% for path in details.found_paths %}
+                    <li>
+                        <a href="{{ url }}{{ path }}" target="_blank">
+                            {{ path }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No common paths found</p>
+        {% endif %}
+    </div>
 
     <h2>Feedback:</h2>
     <form method="post" action="/feedback">

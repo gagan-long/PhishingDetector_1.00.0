@@ -193,6 +193,40 @@ footer {
     margin-top: auto;
 }
 
+
+
+.path-results {
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.path-results ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.path-results li {
+    padding: 5px;
+    border-bottom: 1px solid #eee;
+}
+
+.path-results li:last-child {
+    border-bottom: none;
+}
+
+.path-results a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.path-results a:hover {
+    text-decoration: underline;
+}
+
+
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
     .container {
